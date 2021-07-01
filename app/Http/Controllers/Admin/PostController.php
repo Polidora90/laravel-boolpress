@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //funzione provvisoria. Non voglio vedere tutti ipost ma solo quelli creati all'utente loggato. No?
+        $data = [
+            'posts' => Post::all()
+        ];
+        return view('admin.posts.index', $data);
     }
 
     /**
