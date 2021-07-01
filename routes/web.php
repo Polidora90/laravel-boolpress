@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/posts', 'PostController@index');
+Route::get('/posts', 'PostController@index')->name('posts.index');
 
 
 Auth::routes();
@@ -25,9 +25,10 @@ Auth::routes();
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware('auth')
+    ->name('admin.')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
-        Route::get('/posts', 'PostController@index');
-        //Route::resource('/posts', 'PostController')
-        //con il metodo sopra creiamo tutte le rotte della crud
+        //Route::get('/posts', 'PostController@index');
+        Route::resource('/posts', 'PostController');
+        //con il metodo sopra creiamo tutte le rotte della crud. Per vederle: 
     });
