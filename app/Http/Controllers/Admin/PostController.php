@@ -49,9 +49,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        //mostra il primo post where la col 'slug' ha il valore di $slug
+        $post = Post::where('slug', $slug)->first();
+
+        if(!$post) {
+            abort(404);
+        }
+
+        $data = ['post' => $post];
+
+        return view('posts.show', $data);
     }
 
     /**
