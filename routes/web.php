@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/posts', 'PostController@index')->name('posts.index');
-Route::get('/posts/{post}','PostController@show')->name('posts.show');
+
+//slug in url!!
+Route::get('/posts/{slug}','PostController@show')->name('posts.show');
 
 
 Auth::routes();
@@ -31,5 +33,5 @@ Route::prefix('admin')
         Route::get('/', 'HomeController@index')->name('index');
         //Route::get('/posts', 'PostController@index');
         Route::resource('/posts', 'PostController');
-        //con il metodo sopra creiamo tutte le rotte della crud. Per vederle: 
+        //con il metodo sopra creiamo tutte le rotte della crud. Per vederle: php artisan route:list
     });
