@@ -1,0 +1,19 @@
+.my-admin-navbar {
+    background-color: $purple;
+    // height: 10px;
+
+    .my-navbar-nav {
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        li {
+
+            a {
+                color: white;
+                font-weight: bold;
+            }
+
+        }
+
+    }
+}

@@ -69,8 +69,13 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+            </div> 
         </nav>
+        <section class="my-admin-navbar">
+            <div class="container">
+                @yield('admin_navbar')
+            </div>
+        </section>
 
         <main class="py-4">
             @yield('content')

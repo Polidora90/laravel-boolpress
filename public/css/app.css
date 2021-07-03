@@ -10955,3 +10955,17 @@ a.text-dark:focus {
   margin-bottom: 0;
 }
 
+.my-admin-navbar {
+  background-color: #9561e2;
+}
+
+.my-admin-navbar .my-navbar-nav {
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.my-admin-navbar .my-navbar-nav li a {
+  color: white;
+  font-weight: bold;
+}
+

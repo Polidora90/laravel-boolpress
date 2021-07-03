@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@extends('layouts.psrtials.admin_navbar')
+
 @section('content')
 
 <div class="container">
