@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         //funzione provvisoria. Non voglio vedere tutti ipost ma solo quelli creati all'utente loggato. No?
         $data = [
-            'posts' => Post::all()
+            'posts' => Post::orderBy('created_at', 'DESC')->get()
         ];
         return view('admin.posts.index', $data);
     }
