@@ -10942,3 +10942,12 @@ a.text-dark:focus {
   }
 }
 
+.my-img-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.my-img-container img {
+  transform: translateY(-35%);
+}
+
