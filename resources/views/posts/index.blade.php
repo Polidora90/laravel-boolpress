@@ -14,7 +14,8 @@
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{Str::limit($post->content, 200)}}</p>
-            <p class="card-text"><small class="text-muted">Creazione: {{ $post->created_at }}</small></p>
+            <a href="{{ route('posts.show', ['slug' => $post->slug]) }}" class="btn btn-outline-secondary btn-sm mb-2">Continua a leggere...</a>
+            <p class="card-text my-created-at"><small class="text-muted">Creazione: {{ $post->created_at }}</small></p>
             <p class="card-text"><small class="text-muted">Ultima modifica: {{ $post->updated_at }}</small></p>
         </div>
     </div>

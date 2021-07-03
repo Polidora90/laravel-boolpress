@@ -10951,3 +10951,7 @@ a.text-dark:focus {
   transform: translateY(-35%);
 }
 
+.my-created-at {
+  margin-bottom: 0;
+}
+
