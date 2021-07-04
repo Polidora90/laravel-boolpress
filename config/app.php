@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Polodora blog'),
+    'name' => env('APP_NAME', 'Polodora Blog'),
 
     /*
     |--------------------------------------------------------------------------
