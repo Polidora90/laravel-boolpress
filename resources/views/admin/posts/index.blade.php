@@ -29,8 +29,8 @@
                 <td>{{ $post->slug }}</td>
                 <td>-</td>
                 <td>
-                    <a href="#">Dettagli</a>
-                    <a href="#">Modifica</a>
+                    <a href="{{ route('admin.posts.show', [$post->slug]) }}">Dettagli</a>
+                    <a href="{{ route('admin.posts.edit', [$post->slug]) }}">Modifica</a>
                     <a href="#">Elimina</a>
                 </td>
             </tr>

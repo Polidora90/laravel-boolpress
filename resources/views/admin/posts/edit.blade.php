@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="container">
-    <h2> {{ __('Ciao ' . Auth::user()->name . ', crea il tuo nuovo post:') }}</h2>
+    <h2> {{ __('Ciao ' . Auth::user()->name . ', modifica qui il tuo post:') }}</h2>
 
-        <form action="{{ route('admin.posts.update') }}" method='post'>
+    <form action="{{ route('admin.posts.update', ['post' => $post->id]) }}" method='post'>
     @csrf
 
     @method('PATCH')
