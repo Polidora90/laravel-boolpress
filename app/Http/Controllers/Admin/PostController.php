@@ -118,9 +118,35 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title'=>'required|max:255',
+            'content'=>'required',
+        ]);
+
+        $form_data = $request->all();
+
+        //controllo se il titolo in entrata sia diverso dal vecchio titolo
+        if ($form_data['title'] != $post->title) {
+            //allora devo modificare anche lo slug
+            $slug = Str::slug($form_data['title']);
+            $slug_base = $slug;
+            //verifico che non esista già in db
+            $post_presente = Post::where('slug', $slug)->first();
+            $contatore = 1;
+
+            while($post_presente) {
+                $slug = $slug_base . '-' . $contatore;
+                $contatore++;
+                $post_presente = Post::where('slug', $slug)->first();
+            }
+            //assegno lo slug
+            $form_data['slug'] = $slug;
+        }
+
+        $post->update($form_data);
+        return redirect()->route('admin.post.index');
     }
 
     /**
