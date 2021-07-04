@@ -6,6 +6,7 @@ use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\User;
 
 class PostController extends Controller
 {
@@ -86,8 +87,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+
+    /*
+    Funzione che mi torna user undefined
+    public function show($slug, Post $post, User $user)
     {
+        //grazie alle relazioni tra tabelle trovo l'user e poi passo il dato in $data
+        $user = $post->user;
+        
         //mostra il primo post where la col 'slug' ha il valore di $slug
         $post = Post::where('slug', $slug)->first();
 
@@ -95,9 +102,13 @@ class PostController extends Controller
             abort(404);
         }
 
-        $data = ['post' => $post];
+        $data = ['post' => $post, 'user' => $user];
 
         return view('posts.show', $data);
+    }
+    */
+    public function show(Post $post) {
+        return view('admin.posts.show', ['post' => $post]);
     }
 
     /**

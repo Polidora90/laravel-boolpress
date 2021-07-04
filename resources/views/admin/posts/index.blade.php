@@ -18,6 +18,7 @@
                 <th>Titolo</th>
                 <th>Slug</th>
                 <th>Categoria</th>
+                <th>Utente</th>
                 <th class="text-center">Azioni</th>
             </tr>
         </thead>
@@ -28,8 +29,9 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
                 <td>-</td>
+                <td>{{ $post->user->name }}</td>
                 <td>
-                    <a href="{{ route('admin.posts.show', $post->slug) }}">Dettagli</a>
+                    <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>
                     <a href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
 
                     <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post" class="delete-form">
