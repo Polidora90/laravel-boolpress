@@ -73,8 +73,6 @@ class PostController extends Controller
         //assegno lo slug
         $new_post->slug = $slug;
 
-        $new_post->user = get_current_user();
-
         $new_post->save();
         return redirect()->route('admin.posts.index');
 
