@@ -44,7 +44,7 @@ class PostController extends Controller
         //validazione dei dati inseriti
         $request->validate([
             'title'=>'required|max:255',
-            'content'=>'reqiored',
+            'content'=>'required',
         ]);
         $form_data = $request->all();
         $new_post = new Post();
@@ -72,6 +72,8 @@ class PostController extends Controller
         //ora so che lo slug creato non esiste nel db
         //assegno lo slug
         $new_post->slug = $slug;
+
+        $new_post->user = get_current_user();
 
         $new_post->save();
         return redirect()->route('admin.posts.index');
