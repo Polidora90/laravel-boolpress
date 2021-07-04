@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -40,7 +41,41 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validazione dei dati inseriti
+        $request->validate([
+            'title'=>'required|max:255',
+            'content'=>'reqiored',
+        ]);
+        $form_data = $request->all();
+        $new_post = new Post();
+        $new_post->fill($form_data);
+
+        //genera lo slug
+        $slug = Str::slug($new_post->title);
+        //slug base perchè poi lo slug completo comprenderà il contatore
+        $slug_base = $slug;
+
+        //verifico che lo slug generato non esista già nel db
+        //tornami il primo post in cui il valore della colonna slug sia uguale allo slug appena creato
+        $post_presente = Post::where('slug', $slug)->first();
+        $contatore = 1;
+
+        //se trova il post con lo stesso slug entra nel ciclo while
+        while ($post_presente) {
+            //crea uno slug + il contatore
+            $slug = $slug_base . '-' . $contatore;
+            $contatore++;
+            $post_presente = Post::where('slug', $slug)->first();
+            //ovvero: fino a quando trovi uno slug uguale incrementa il contatore
+        }
+
+        //ora so che lo slug creato non esiste nel db
+        //assegno lo slug
+        $new_post->slug = $slug;
+
+        $new_post->save();
+        return redirect()->route('admin.posts.index');
+
     }
 
     /**
