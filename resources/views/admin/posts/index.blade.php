@@ -29,9 +29,16 @@
                 <td>{{ $post->slug }}</td>
                 <td>-</td>
                 <td>
-                    <a href="{{ route('admin.posts.show', [$post->slug]) }}">Dettagli</a>
-                    <a href="{{ route('admin.posts.edit', [$post->slug]) }}">Modifica</a>
-                    <a href="#">Elimina</a>
+                    <a href="{{ route('admin.posts.show', $post->slug) }}">Dettagli</a>
+                    <a href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
+
+                    <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post" class="delete-form">
+                    @csrf
+                    @method('DELETE')
+                    
+                    <input type="submit" value="Elimina">
+                    </form>
+                    
                 </td>
             </tr>
             @endforeach
