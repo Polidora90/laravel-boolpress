@@ -49,6 +49,8 @@ class PostController extends Controller
         $form_data = $request->all();
         $new_post = new Post();
         $new_post->fill($form_data);
+        //assegnazione dello user_id fuori dal fill per assicurarmi ch enon venga ipoteticamente inserito da un utente
+        $new_post->user_id = $request->user()->id;
 
         //genera lo slug
         $slug = Str::slug($new_post->title);
