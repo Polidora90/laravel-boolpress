@@ -34,6 +34,9 @@ Route::prefix('admin')
         //categorie
         Route::get('/categories', 'CategoryController@index')->name('categories.index');
 
+        //tag
+        Route::get('/tags', 'TagController@index')->name('tags.index');
+
         //Route::get('/posts', 'PostController@index');
         Route::resource('/posts', 'PostController');
         //con il metodo sopra creiamo tutte le rotte della crud. Per vederle: php artisan route:list
