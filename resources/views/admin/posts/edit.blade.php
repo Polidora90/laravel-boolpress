@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@extends('layouts.partials.admin_navbar')
+
 
 @section('content')
 
@@ -38,6 +40,7 @@
 
 
         <input type="submit" value="Salva modifiche" class="btn btn-outline-secondary">
+        <a href="{{ route('admin.posts.index') }}">Torna ai post</a>
     
     </form>
 

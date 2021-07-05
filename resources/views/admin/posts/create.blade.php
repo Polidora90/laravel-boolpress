@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@extends('layouts.partials.admin_navbar')
+
 
 @section('content')
 
@@ -35,6 +37,8 @@
 
 
         <input type="submit" value="Invia" class="btn btn-outline-secondary">
+        <a href="{{ route('admin.posts.index') }}">Torna ai post</a>
+
     
     </form>
 
