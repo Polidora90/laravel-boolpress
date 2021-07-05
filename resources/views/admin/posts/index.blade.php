@@ -28,7 +28,7 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->slug }}</td>
-                <td>-</td>
+                <td>{{ $post->category ? $post->category->name : '-' }}</td>
                 <td>{{ $post->user->name }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>

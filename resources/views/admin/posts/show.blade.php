@@ -15,7 +15,7 @@
             <p class="card-text"><small class="text-muted">Ultima modifica: {{ $post->updated_at }}</small></p>
             <p class="card-text"><small class="text-muted">Utente: {{ $post->user->name }} ({{ $post->user->email }})</small></p>
             <img src="{{ asset('images/placeholder.png') }}" class="rounded mx-auto d-block" alt="placeholder">
-            <a href="{{ route('posts.index') }}">...Torna a Tutti i post</a>
+            <a href="{{ route('admin.posts.index') }}">...Torna a Tutti i post</a>
         </div>
 
         <a href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>

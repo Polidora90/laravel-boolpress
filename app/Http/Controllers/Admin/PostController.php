@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -31,7 +32,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', ['categories' => $categories]);
     }
 
     /**
@@ -117,15 +120,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug)
-    {
-        $post = Post::where('slug', $slug)->first();
+    public function edit(Post $post)
+    {   
+        $categories = Category::all();
 
-        if(!$post) {
-            abort(404);
-        }
-
-        $data = ['post' => $post];
+        $data = [
+            'post' => $post,
+            'categories' => $categories
+        ];
 
         return view('admin.posts.edit', $data);
     }
