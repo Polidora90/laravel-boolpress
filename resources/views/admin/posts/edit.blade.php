@@ -46,8 +46,8 @@
                 {{-- input in tag label per avere più area in cui cliccare e non ridurre gli id--}}
                 <label class="form-check-label">
                     {{-- [] per specificare che i nom iuguali me li deve unire in un array e non sovrascrivere --}}
-                    <input type="checkbox" name="tags[]" class="form-check-input" value="{{ $tag->id }}" >
-                    {{-- {{ in_array($tag->id, old('tags', [])) ? 'checked' : ""}} --}}
+                    <input type="checkbox" name="tags[]" class="form-check-input" value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? "checked" : "" }}{{ in_array($tag->id, old('tags', [])) ? 'checked' : ""}}>
+                    
                 {{ $tag->name }}
                 </label>
             </div>
