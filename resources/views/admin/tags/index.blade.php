@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Tutte le categorie</h2>
+    <h2>Tutti i tags</h2>
     <table class="table">
         <thead>
             <tr>
@@ -24,7 +24,7 @@
                 <td>{{ $tag->name }}</td>
                 <td>{{ $tag->slug }}</td>
                 {{-- posso usare il count perchè la proprietà tra parentesi ci torna tutti i post esistenti di quella categoria sottoforma di array --}}
-                <td>{{--{{ count($tag->posts) }}--}}</td>
+                <td>{{ count($tag->posts) }}</td>
                 <td>{{ $tag->created_at}}</td>
                 {{-- <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>
