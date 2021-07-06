@@ -175,9 +175,19 @@ class PostController extends Controller
             $form_data['slug'] = $slug;
         }
 
+        //se vengono deselezionati tutti i tag ho errore quindi:
+        //se questa chiave non esiste in form_data la creo manualmente
+        if (!key_exists('tags', $form_data)) {
+            $form_data['tags'] = [];
+        }
+
         //quando il post viene modificato devo ristabilire qiali sono i nuovi tag
         $post->tags()->detach();
         $post->tags()->attach($form_data['tags']);
+
+        //metodo sync
+        // $post->tags()->sync($form_data['tags])
+
 
         $post->update($form_data);
         return redirect()->route('admin.posts.index');
