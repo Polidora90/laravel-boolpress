@@ -19,7 +19,7 @@
             <a href="{{ route('admin.posts.index') }}">...Torna a Tutti i post</a>
         </div>
 
-        <a href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
+        <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
 
         <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post" class="delete-form">
             @csrf
