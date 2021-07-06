@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Post;
 use App\Http\Controllers\Controller;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\User;
+use Illuminate\Validation\Rules\Exists;
 
 class PostController extends Controller
 {
@@ -124,10 +126,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {   
         $categories = Category::all();
+        $tags = Tag::all();
 
         $data = [
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ];
 
         return view('admin.posts.edit', $data);
@@ -145,11 +149,14 @@ class PostController extends Controller
         $request->validate([
             'title'=>'required|max:255',
             'content'=>'required',
-            'category_id'=>'nullable|exists:categories,id'
+            'category_id'=>'nullable|exists:categories,id',
+            //ogni tag che miviene passato deve esistere nella tabella tags
+            'tags'=>'exists:tags,id'
+
         ]);
 
         $form_data = $request->all();
-
+       
         //controllo se il titolo in entrata sia diverso dal vecchio titolo
         if ($form_data['title'] != $post->title) {
             //allora devo modificare anche lo slug
@@ -167,6 +174,10 @@ class PostController extends Controller
             //assegno lo slug
             $form_data['slug'] = $slug;
         }
+
+        //quando il post viene modificato devo ristabilire qiali sono i nuovi tag
+        $post->tags()->detach();
+        $post->tags()->attach($form_data['tags']);
 
         $post->update($form_data);
         return redirect()->route('admin.posts.index');

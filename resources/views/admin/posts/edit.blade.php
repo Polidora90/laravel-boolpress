@@ -38,9 +38,24 @@
             @enderror
         </div>
 
+        <div class="form-group">
+            <label>Tags</label> <br>
+
+            @foreach($tags as $tag)
+            <div class="form-check form-check-inline">
+                {{-- input in tag label per avere più area in cui cliccare e non ridurre gli id--}}
+                <label class="form-check-label">
+                    {{-- [] per specificare che i nom iuguali me li deve unire in un array e non sovrascrivere --}}
+                    <input type="checkbox" name="tags[]" class="form-check-input" value="{{ $tag->id }}" >
+                    {{-- {{ in_array($tag->id, old('tags', [])) ? 'checked' : ""}} --}}
+                {{ $tag->name }}
+                </label>
+            </div>
+            @endforeach
+        </div>
+
 
         <input type="submit" value="Salva modifiche" class="btn btn-outline-secondary">
-        <a href="{{ route('admin.posts.index') }}">Torna ai post</a>
     
     </form>
 

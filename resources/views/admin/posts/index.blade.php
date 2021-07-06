@@ -34,7 +34,7 @@
                 <td>{{ $post->user->name }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>
-                    <a href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
+                    <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
 
                     <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post" class="delete-form">
                     @csrf
