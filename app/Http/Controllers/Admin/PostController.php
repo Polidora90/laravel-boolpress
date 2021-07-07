@@ -35,8 +35,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.create', ['categories' => $categories]);
+        return view('admin.posts.create', ['categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -51,14 +52,16 @@ class PostController extends Controller
         $request->validate([
             'title'=>'required|max:255',
             'content'=>'required',
-            'category_id'=>'nullable|exists:categories,id'
+            // 'category_id'=>'exists:categories,id',
+            'tags'=>'exists:tags,id'
+
         ]);
+        
         $form_data = $request->all();
         $new_post = new Post();
         $new_post->fill($form_data);
         //assegnazione dello user_id fuori dal fill per assicurarmi ch enon venga ipoteticamente inserito da un utente
         $new_post->user_id = $request->user()->id;
-
         //genera lo slug
         $slug = Str::slug($new_post->title);
         //slug base perchè poi lo slug completo comprenderà il contatore
@@ -82,6 +85,10 @@ class PostController extends Controller
         //assegno lo slug
         $new_post->slug = $slug;
 
+        if ($new_post->category_id == null) {
+            $new_post->category_id = Category::where('name', 'default')->first()->id;
+        }
+        
         $new_post->save();
         return redirect()->route('admin.posts.index');
 
