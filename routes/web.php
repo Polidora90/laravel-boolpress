@@ -38,6 +38,6 @@ Route::prefix('admin')
         Route::get('/tags', 'TagController@index')->name('tags.index');
 
         //Route::get('/posts', 'PostController@index');
+        Route::get('/posts/filter', 'PostController@filter')->name('posts.filter');
         Route::resource('/posts', 'PostController');
-        //con il metodo sopra creiamo tutte le rotte della crud. Per vederle: php artisan route:list
     });

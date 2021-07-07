@@ -24,7 +24,9 @@
                 <td>{{ $tag->name }}</td>
                 <td>{{ $tag->slug }}</td>
                 {{-- posso usare il count perchè la proprietà tra parentesi ci torna tutti i post esistenti di quella categoria sottoforma di array --}}
-                <td>{{ count($tag->posts) }}</td>
+                <td>
+                    <a href="{{ route('admin.posts.filter', ['tag'=>$tag->id]) }}" class="btn btn-outline-dark">{{ count($tag->posts) }}</a>
+                </td>
                 <td>{{ $tag->created_at}}</td>
                 {{-- <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>

@@ -20,10 +20,21 @@ class PostController extends Controller
      */
     public function index()
     {
-        //funzione provvisoria. Non voglio vedere tutti ipost ma solo quelli creati all'utente loggato. No?
-        $data = [
-            'posts' => Post::orderBy('created_at', 'DESC')->get()
-        ];
+        $incomingData = session('posts');
+        //se ci sono già dati non caricarli nuovamente
+        if (isset($incomingData)) 
+        {
+            $data = [
+                'posts' => $incomingData
+            ];
+        }
+        else 
+        {
+            $data = [
+                'posts' => Post::orderBy('created_at', 'DESC')->get()
+            ];
+
+        }
         return view('admin.posts.index', $data);
     }
 
@@ -210,5 +221,15 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('admin.posts.index');
+    }
+
+    public function filter(Request $request)
+    {
+        $filters = $request->all();
+
+        $posts = Post::join('post_tag', 'posts.id', '=', 'post_tag.post_id')
+            ->where('post_tag.tag_id', $filters['tag'])->get();
+
+        return redirect()->route('admin.posts.index')->with(['posts' => $posts]);
     }
 }
