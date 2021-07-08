@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//non serve il name dai momento che non farò mai il redirect a queste rotte
+Route::get('/posts', 'Api\PostController@index');
