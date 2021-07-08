@@ -9,6 +9,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Validation\Rules\Exists;
 
 class PostController extends Controller
@@ -35,6 +36,20 @@ class PostController extends Controller
             ];
 
         }
+
+        //formattazione della data tarmite Carbom
+        foreach ($data['posts'] as $post) 
+        {
+            $date = $post->created_at;
+
+            //mi passa la data come stringa
+            $carbonDate = Carbon::parse($date);
+
+            $formattedDate = $carbonDate->format('d/m/y');
+
+            $post->createdAt = $formattedDate;
+        }
+
         return view('admin.posts.index', $data);
     }
 

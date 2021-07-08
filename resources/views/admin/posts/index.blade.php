@@ -21,6 +21,7 @@
                 <th>Slug</th>
                 <th>Categoria</th>
                 <th>Utente</th>
+                <th>Creazione</th>
                 <th class="text-center">Azioni</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td>{{ $post->slug }}</td>
                 <td>{{ $post->category ? $post->category->name : '-' }}</td>
                 <td>{{ $post->user->name }}</td>
+                <td>{{ $post->createdAt }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>
                     <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
