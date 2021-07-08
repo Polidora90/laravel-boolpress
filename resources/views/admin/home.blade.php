@@ -17,6 +17,9 @@
 
                     {{ __('Benvenuto ' . Auth::user()->name . '!') }}
                 </div>
+                <div>
+                    <a href="{{ route('admin.users.index') }}">Il tuo profilo</a>
+                </div>
             </div>
         </div>
     </div>

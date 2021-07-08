@@ -37,6 +37,9 @@ Route::prefix('admin')
         //tag
         Route::get('/tags', 'TagController@index')->name('tags.index');
 
+        //utenti
+        Route::get('/users', 'UserController@index')->name('users.index');
+
         //Route::get('/posts', 'PostController@index');
         Route::get('/posts/filter', 'PostController@filter')->name('posts.filter');
         Route::resource('/posts', 'PostController');
