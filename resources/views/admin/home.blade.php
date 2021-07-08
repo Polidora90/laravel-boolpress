@@ -16,10 +16,14 @@
                     @endif
 
                     {{ __('Benvenuto ' . Auth::user()->name . '!') }}
+
+                    <p>Il tuo blog contiene {{ $statistics['posts'] }} post.</p>
+
+                    <div>
+                        <a href="{{ route('admin.users.index') }}">Il tuo profilo</a>
+                    </div>
                 </div>
-                <div>
-                    <a href="{{ route('admin.users.index') }}">Il tuo profilo</a>
-                </div>
+               
             </div>
         </div>
     </div>
