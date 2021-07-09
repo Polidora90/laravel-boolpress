@@ -47,7 +47,7 @@ class PostController extends Controller
 
             $formattedDate = $carbonDate->format('d/m/y');
 
-            $post->createdAt = $formattedDate;
+            $post->FormattedCreatedAt = $formattedDate;
         }
 
         return view('admin.posts.index', $data);

@@ -33,7 +33,7 @@
                 <td>{{ $post->slug }}</td>
                 <td>{{ $post->category ? $post->category->name : '-' }}</td>
                 <td>{{ $post->user->name }}</td>
-                <td>{{ $post->createdAt }}</td>
+                <td>{{ $post->FormattedcreatedAt }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post ->id]) }}">Dettagli</a>
                     <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
