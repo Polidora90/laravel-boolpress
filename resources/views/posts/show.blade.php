@@ -12,7 +12,9 @@
             <p class="card-text">{{ $post->content }}</p>
             <p class="card-text my-created-at"><small class="text-muted">Creazione: {{ $post->created_at }}</small></p>
             <p class="card-text"><small class="text-muted">Ultima modifica: {{ $post->updated_at }}</small></p>
-            <img src="{{ asset('images/placeholder.png') }}" class="rounded mx-auto d-block" alt="placeholder">
+            @if($post->cover_url)
+            <img src="{{ asset('storage/' . $post->cover_url) }}" class="rounded mx-auto d-block" alt="post cover">
+            @endif
             <a href="{{ route('posts.index') }}">...Torna a Tutti i post</a>
         </div>
     </div>

@@ -8,9 +8,11 @@
     
     @foreach($posts as $post)
     <div class="card mb-3 pt-3">
+        @if($post->cover)
         <div class="my-img-container">
-            <img src="{{ asset('images/placeholder.png') }}" class="card-img-top" alt="placeholder">
+            <img src="{{ $post->cover_url ? asset('storage/' . $post->cover_url) : asset('images/placeholder.png') }}" class="card-img-top" alt="post cover">
         </div>
+        @endif
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{Str::limit($post->content, 200)}}</p>

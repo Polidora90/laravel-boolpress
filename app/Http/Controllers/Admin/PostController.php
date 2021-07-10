@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Validation\Rules\Exists;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -113,6 +114,12 @@ class PostController extends Controller
 
         if ($new_post->category_id == null) {
             $new_post->category_id = Category::where('name', 'default')->first()->id;
+        }
+
+        //carico l'immagine di copertina
+        if (key_exists("postCover", $form_data)) {
+            $storageResult = Storage::put("postCovers", $form_data["postCover"]);
+            $new_post->cover_url = $storageResult;
         }
         
         $new_post->save();
@@ -220,6 +227,16 @@ class PostController extends Controller
 
         //metodo sync
         // $post->tags()->sync($form_data['tags])
+
+        //crea la cartella postCover e salva i dati specificati provenienti dal form
+        if(key_exists("postCover", $form_data)){
+            if($post->cover_url){
+                Storage::delete($post->cover_url);
+            }
+
+            $storageResult = Storage::put("postCovers", $form_data["postCover"]);
+            $form_data['cover_url'] = $storageResult;
+        }
 
 
         $post->update($form_data);

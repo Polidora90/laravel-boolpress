@@ -23,7 +23,9 @@
             <p class="card-text my-created-at"><small class="text-muted">Creazione: {{ $post->created_at }}</small></p>
             <p class="card-text"><small class="text-muted">Ultima modifica: {{ $post->updated_at }}</small></p>
             <p class="card-text"><small class="text-muted">Utente: {{ $post->user->name }} ({{ $post->user->email }})</small></p>
-            <img src="{{ asset('images/placeholder.png') }}" class="rounded mx-auto d-block" alt="placeholder">
+            @if($post->cover_url) 
+            <img src="{{ asset('storage/' . $post->cover_url) }}" class="rounded mx-auto d-block" alt="Post Cover">
+            @endif
         </div>
 
         <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>

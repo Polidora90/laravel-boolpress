@@ -7,10 +7,16 @@
 <div class="container">
     <h2> {{ __('Ciao ' . Auth::user()->name . ', modifica qui il tuo post:') }}</h2>
 
-    <form action="{{ route('admin.posts.update', ['post' => $post->id]) }}" method='post'>
+    <form action="{{ route('admin.posts.update', ['post' => $post->id]) }}" method='post' enctype="multipart/form-data">
     @csrf
 
     @method('PATCH')
+        <div class="mb-3">
+            {{-- name= nome con cui leggo il file nel controller --}}
+            {{-- l'accept non è vincolante, andrebbe definito nel controller --}}
+            <label>Copertina del post</label> <br>
+            <input type="file" name="postCover" accept=".jpeg,.jpg">
+        </div>
 
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
@@ -53,7 +59,6 @@
             </div>
             @endforeach
         </div>
-
 
         <input type="submit" value="Salva modifiche" class="btn btn-outline-secondary">
     
