@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewUserWelcomeEmail;
 
 class RegisterController extends Controller
 {
@@ -23,6 +25,9 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    //prima istanziare la variabile per poterle attribuire
+    public $user;
 
     /**
      * Where to redirect users after registration.
@@ -64,10 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $newUser =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        Mail::to($data['email'])->send(new NewUserWelcomeEmail($newUser));
+
+        return $newUser;
     }
 }
